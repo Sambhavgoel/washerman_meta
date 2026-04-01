@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ | WasherMan</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f6f9;
+    color: #333;
+}
+
+.header {
+    background: linear-gradient(135deg, #8e44ad, #3498db);
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 900px;
+    margin: -40px auto 40px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.faq-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.faq-question {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-answer {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #555;
+}
+
+.faq-question span {
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>Frequently Asked Questions</h1>
+<p>Find answers to common queries</p>
+</div>
+
+<div class="container">
+
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">
+What services does WasherMan provide?
+<span>+</span>
+</div>
+<div class="faq-answer">
+WasherMan provides a wide range of services including car cleaning, home cleaning, and laundry services such as washing, ironing, and dry cleaning. Our services are designed to offer convenience and high-quality results at your doorstep.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">
+How can I book a service?
+<span>+</span>
+</div>
+<div class="faq-answer">
+You can easily book a service through our website, phone call, or WhatsApp. Simply select your desired service, choose a convenient time slot, and confirm your booking.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">
+What are the payment options available?
+<span>+</span>
+</div>
+<div class="faq-answer">
+We accept multiple payment methods including UPI, debit/credit cards, online payments, and cash after service completion, depending on the service type.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">
+Can I cancel or reschedule my booking?
+<span>+</span>
+</div>
+<div class="faq-answer">
+Yes, you can cancel or reschedule your booking at least 2 hours before the scheduled time. Late cancellations may not be eligible for refunds.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">
+Do I need to provide water and electricity?
+<span>+</span>
+</div>
+<div class="faq-answer">
+Yes, for most services such as car and home cleaning, customers are required to provide access to water and electricity for smooth service execution.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">
+Are your staff trained and verified?
+<span>+</span>
+</div>
+<div class="faq-answer">
+Yes, all WasherMan staff members are trained professionals and undergo proper verification to ensure safety, quality, and reliability.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">
+What if I am not satisfied with the service?
+<span>+</span>
+</div>
+<div class="faq-answer">
+Customer satisfaction is our priority. If you are not satisfied, you can report the issue within 2 hours of service completion, and we will review and resolve it accordingly.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">
+Do you offer services in my area?
+<span>+</span>
+</div>
+<div class="faq-answer">
+Our services are available in selected locations. Please contact us or check availability on our website to confirm if we serve your area.
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 WasherMan. All Rights Reserved.
+</div>
+
+<script>
+function toggleFAQ(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector("span");
+
+    if (answer.style.display === "block") {
+        answer.style.display = "none";
+        icon.innerHTML = "+";
+    } else {
+        answer.style.display = "block";
+        icon.innerHTML = "-";
+    }
+}
+</script>
+
+</body>
+</html>

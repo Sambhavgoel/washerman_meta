@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cleaning Offer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Inter',sans-serif;
+background:#f5f7fb;
+}
+
+/* PAGE CONTENT */
+
+.page{
+padding:120px;
+text-align:center;
+transition:0.3s;
+}
+
+.blur{
+filter:blur(7px);
+}
+
+/* OVERLAY */
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(192, 25, 25, 0.45);
+display:flex;
+align-items:center;
+justify-content:center;
+opacity:0;
+visibility:hidden;
+transition:.4s;
+}
+
+.overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+/* POPUP CONTAINER */
+
+.popup{
+
+width:520px;
+display:flex;
+background:white;
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 30px 80px rgba(0,0,0,0.25);
+animation:popupShow .6s ease;
+
+}
+
+@keyframes popupShow{
+
+0%{
+transform:translateY(80px) scale(.85);
+opacity:0;
+}
+
+100%{
+transform:translateY(0) scale(1);
+opacity:1;
+}
+
+}
+
+/* IMAGE SIDE */
+
+.popup-img{
+width:45%;
+background:url("https://images.unsplash.com/photo-1581578731548-c64695cc6952") center/cover no-repeat;
+}
+
+/* CONTENT */
+
+.popup-content{
+width:55%;
+padding:35px;
+position:relative;
+}
+
+/* CLOSE BUTTON */
+
+.close{
+position:absolute;
+top:15px;
+right:15px;
+font-size:20px;
+cursor:pointer;
+color:#777;
+}
+
+/* BADGE */
+
+.badge{
+display:inline-block;
+background:#ff4b4b;
+color:white;
+padding:6px 14px;
+font-size:13px;
+border-radius:20px;
+font-weight:600;
+margin-bottom:12px;
+}
+
+/* TITLE */
+
+.popup-content h2{
+margin:0;
+font-size:26px;
+color:#222;
+}
+
+.popup-content h2 span{
+color:#ff4b4b;
+}
+
+.service-points{
+list-style:none;
+padding:0;
+margin-top:15px;
+}
+
+.service-points li{
+
+display:flex;
+align-items:center;
+gap:10px;
+
+font-size:15px;
+color:#444;
+
+margin-bottom:10px;
+
+}
+
+.icon{
+
+height:28px;
+width:28px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:#f1f5ff;
+border-radius:50%;
+
+font-size:14px;
+
+}
+/* TEXT */
+
+.popup-content p{
+font-size:15px;
+color:#555;
+line-height:1.6;
+margin-top:10px;
+}
+
+/* BUTTON */
+
+.book-btn{
+
+margin-top:20px;
+padding:12px 12px;
+border:none;
+border-radius:8px;
+font-size:17px;
+font-weight:600;
+color:white;
+margin-right: 10px;
+cursor:pointer;
+
+background:linear-gradient(135deg,#00b09b,#00d084);
+
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+transition:.3s;
+
+}
+.Explore-btn{
+    margin-top:20px;
+padding:13px 13px;
+display: flex;
+border:none;
+border-radius:8px;
+font-size:17px;
+font-weight:600;
+color:white;
+cursor:pointer;
+
+background:linear-gradient(135deg,#2317cf,#430ebe);
+
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+transition:.3s;
+}
+
+.book-btn:hover{
+
+transform:translateY(-2px);
+box-shadow:0 15px 35px rgba(0,0,0,0.2);
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="page" class="page">
+
+<h1>Welcome to Our Website</h1>
+<p>Professional Home Services</p>
+
+</div>
+
+
+<!-- POPUP -->
+
+<div id="popup" class="overlay">
+
+<div class="popup">
+
+<div class="popup-img"></div>
+
+<div class="popup-content">
+
+<div class="close" onclick="closePopup()">✕</div>
+
+<div class="badge">LIMITED OFFER</div>
+
+<h2><span>80% OFF</span><br>Home Cleaning</h2>
+
+<ul class="service-points">
+
+<li>
+<span class="icon">🧹</span>
+Deep Home Cleaning Service
+</li>
+
+<li>
+<span class="icon">🏢</span>
+Available in Your Society
+</li>
+
+<li>
+<span class="icon">⭐</span>
+Professional Trained Staff
+</li>
+
+<li>
+<span class="icon">💰</span>
+Flat 80% Launch Discount
+</li>
+
+</ul>
+
+<div style="display: flex;">
+<button class="book-btn">Book Now</button>
+<button class="Explore-btn">Explore Now</button>
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+window.onload = function(){
+
+document.getElementById("popup").classList.add("active")
+document.getElementById("page").classList.add("blur")
+
+}
+
+function closePopup(){
+
+document.getElementById("popup").classList.remove("active")
+document.getElementById("page").classList.remove("blur")
+
+}
+
+</script>
+
+</body>
+</html>

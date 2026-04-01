@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Notification Popup</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* POPUP */
+.notification-popup {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 340px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  padding: 15px;
+  display: flex;
+  gap: 12px;
+  animation: notification-slideIn 0.5s ease;
+}
+
+/* CLOSE BUTTON */
+.notification-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #888;
+}
+
+.notification-close:hover {
+  color: #000;
+}
+
+/* AVATAR */
+.notification-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #4CAF50;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* CONTENT */
+.notification-content {
+  flex: 1;
+}
+
+.notification-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.notification-service {
+  font-size: 13px;
+  color: #555;
+}
+
+.notification-rating {
+  color: #FFD700;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.notification-message {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* ANIMATION */
+@keyframes notification-slideIn {
+  from {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="notification-popup" id="notification-popup">
+  
+  <div class="notification-close" onclick="closeNotification()">✖</div>
+
+  <div class="notification-avatar" id="notification-avatar">A</div>
+
+  <div class="notification-content">
+    <div class="notification-name" id="notification-name">Atul Sharma</div>
+    <div class="notification-service" id="notification-service">Kitchen Cleaning</div>
+    <div class="notification-rating" id="notification-rating">⭐⭐⭐⭐☆ (4.2)</div>
+
+    <div class="notification-message" id="notification-message">
+      Amazing service! <br>
+      Highly recommended.
+    </div>
+  </div>
+
+</div>
+
+<script>
+const notificationNames = [
+  "Atul Sharma","Rohit Verma","Neha Gupta","Amit Singh","Priya Mehta",
+  "Vikas Yadav","Pooja Sharma","Rahul Jain","Sneha Kapoor","Ankit Mishra"
+];
+
+const notificationServices = [
+  "Kitchen Cleaning","Bathroom Cleaning","Sofa Cleaning",
+  "Full Home Cleaning","Car Cleaning","Balcony Cleaning"
+];
+
+const notificationMessages = [
+  ["Amazing service!", "Highly recommended."],
+  ["Very professional work.", "Will book again!"],
+  ["Super clean results!", "Worth every rupee."],
+  ["On-time and fast.", "Great experience."],
+  ["Loved the quality.", "Very neat cleaning."],
+  ["Affordable pricing.", "Good staff behavior."],
+  ["Excellent service!", "Totally satisfied."],
+  ["Quick and efficient.", "Impressive work."],
+  ["Best cleaning service.", "5 star experience!"]
+];
+
+// Generate 100 notifications
+let notificationData = [];
+for (let i = 0; i < 100; i++) {
+  let name = notificationNames[Math.floor(Math.random() * notificationNames.length)];
+  let service = notificationServices[Math.floor(Math.random() * notificationServices.length)];
+  let rating = (Math.random() * 1 + 4).toFixed(1);
+  let message = notificationMessages[Math.floor(Math.random() * notificationMessages.length)];
+
+  notificationData.push({ name, service, rating, message });
+}
+
+let notificationIndex = 0;
+
+/* UPDATE */
+function updateNotification() {
+  const popup = document.getElementById("notification-popup");
+  popup.style.display = "flex";
+
+  let data = notificationData[notificationIndex];
+
+  document.getElementById("notification-name").innerText = data.name;
+  document.getElementById("notification-service").innerText = data.service;
+
+  let stars = "⭐".repeat(Math.floor(data.rating));
+  if (data.rating % 1 !== 0) stars += "☆";
+
+  document.getElementById("notification-rating").innerText = stars + " (" + data.rating + ")";
+  document.getElementById("notification-avatar").innerText = data.name.charAt(0);
+
+  document.getElementById("notification-message").innerHTML =
+    data.message[0] + "<br>" + data.message[1];
+
+  // Restart animation
+  popup.style.animation = "none";
+  popup.offsetHeight;
+  popup.style.animation = "notification-slideIn 0.5s ease";
+
+  notificationIndex = (notificationIndex + 1) % notificationData.length;
+}
+
+/* CLOSE */
+function closeNotification() {
+  document.getElementById("notification-popup").style.display = "none";
+}
+
+/* START */
+setInterval(updateNotification, 10000);
+</script>
+
+</body>
+</html>
