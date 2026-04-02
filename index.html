@@ -109,15 +109,15 @@
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <a href="price.html" class="nav-item nav-link">Price</a>
                         <!-- <a href="location.html" class="nav-item nav-link">Washing Points</a> -->
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link " data-toggle="dropdown">Car Washing Services</a>
-                            <div class="dropdown-menu">
+                        
+                        <a href="Car-Cleaning.html" class="nav-link " >Car Washing Services</a>
+                            <!-- <div class="dropdown-menu">
                                 <a href="Fullhome.html" class="dropdown-item">Home Cleaning</a>
                                 <a href="Car-Cleaning.html" class="dropdown-item">Car washing</a>
                                 <a href="team.html" class="dropdown-item">Team Member</a>
                                 <a href="Cloth-Laundry.html" class="dropdown-item">Cloth Laundry</a>
-                            </div>
-                        </div>
+                            </div> -->
+                        
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Home Cleaning Services
                             </a>
@@ -401,8 +401,7 @@
                             font-size: 13px;
                             border: none;
                             border-radius: 20px;
-                            /* background: linear-gradient(135deg, #4ffe7b, #1ac537);
-                            background:#202C45; 
+                            background: linear-gradient(135deg, #4ffe7b, #1ac537);
                             color: white;
                             cursor: pointer;
                             transition: 0.3s;
@@ -1280,6 +1279,9 @@
 
 
 
+
+
+
         .section-header {
             margin-bottom: 50px;
         }
@@ -1303,10 +1305,32 @@
 
         /* Grid Layout */
         .services-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            /* Default: 1 column for mobile */
+            grid-template-columns: 1fr; 
             gap: 25px;
+            padding: 20px;
+        }
+
+        /* Tablets: 2 columns */
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Laptops/Desktops: 3 columns (your 3x2 request) */
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Optional: Ensure images don't break the layout */
+        .service-card img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         /* Card Design */
@@ -1403,6 +1427,41 @@
             z-index: 2;
         }
 
+        /* Prevent overlap on mobile: place content below banner */
+        @media (max-width: 767.98px) {
+            .hero-overlay {
+                position: static;
+                left: auto;
+                top: auto;
+                transform: none;
+                padding: 12px;
+                background: #fff;
+            }
+
+            /* Keep only tagline at top on mobile */
+            .hero-overlay .tagline {
+                position: absolute;
+                top: 12px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 24px);
+                margin: 0;
+                z-index: 3;
+            }
+
+            .app-buttons-hero {
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-bottom: 10px;
+            }
+
+            .app-buttons-hero img {
+                width: 140px;
+            }
+
+            
+        }
+
         .hero-top-text {
             text-align: center;
             margin: 8px 0 20px;
@@ -1431,9 +1490,11 @@
             color: #666;
             margin-top: 0;
             font-weight: 600;
+
         }
 
         .app-buttons {
+            
             display: flex;
             margin-bottom: 15px;
             justify-content: center;
@@ -1446,6 +1507,7 @@
         .hero-wrapper {
             position: relative;
             width: 100%;
+            /* max-width: 200vh; */
         }
 
         .hero-banner {
@@ -3637,7 +3699,7 @@
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   padding: 15px;
-  display: flex;
+  display: none; /* JS controls when it appears */
   z-index: 1;
   gap: 12px;
   animation: notification-slideIn 0.5s ease;
@@ -3735,14 +3797,14 @@ const notificationMessages = [
 
 // Generate 100 notifications
 let notificationData = [];
-for (let i = 0; i < 100; i++) {
+
   let name = notificationNames[Math.floor(Math.random() * notificationNames.length)];
   let service = notificationServices[Math.floor(Math.random() * notificationServices.length)];
   let rating = (Math.random() * 1 + 4).toFixed(1);
   let message = notificationMessages[Math.floor(Math.random() * notificationMessages.length)];
 
   notificationData.push({ name, service, rating, message });
-}
+
 
 let notificationIndex = 0;
 
@@ -3773,13 +3835,30 @@ function updateNotification() {
   notificationIndex = (notificationIndex + 1) % notificationData.length;
 }
 
+let notificationCancelled = false;
+let notificationTimer = null;
+
 /* CLOSE */
 function closeNotification() {
-  document.getElementById("notification-popup").style.display = "none";
+  notificationCancelled = true;
+  const popupEl = document.getElementById("notification-popup");
+  popupEl.style.display = "none";
+  if (notificationTimer) clearTimeout(notificationTimer);
 }
 
-/* START */
-setInterval(updateNotification, 10000);
+function showNextNotification(delayMs) {
+  if (notificationCancelled) return;
+  notificationTimer = setTimeout(function () {
+    if (notificationCancelled) return;
+    updateNotification();
+    showNextNotification(15000); // repeat every 15 seconds until cancelled
+  }, delayMs);
+}
+
+/* START (hide first, then show after 15 seconds) */
+const initialPopupEl = document.getElementById("notification-popup");
+if (initialPopupEl) initialPopupEl.style.display = "none";
+showNextNotification(15000);
 </script>
     <!-- CHATBOT BUTTON -->
     <div class="chatbot-btn" onclick="toggleChat()">
@@ -3819,7 +3898,7 @@ setInterval(updateNotification, 10000);
                 <span></span><span></span><span></span>
             </div>
             <div class="chatbot-btn" onclick="toggleChat()">
-                💬
+                <img src="img/Logo1.png" alt="">
             </div>
 
 

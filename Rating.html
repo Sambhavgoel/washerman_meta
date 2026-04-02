@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notification Popup</title>
 
 <style>
@@ -19,7 +20,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   padding: 15px;
-  display: flex;
+  display: none; /* JS controls when it appears */
   gap: 12px;
   animation: notification-slideIn 0.5s ease;
 }
@@ -176,13 +177,30 @@ function updateNotification() {
   notificationIndex = (notificationIndex + 1) % notificationData.length;
 }
 
+let notificationCancelled = false;
+let notificationTimer = null;
+
 /* CLOSE */
 function closeNotification() {
-  document.getElementById("notification-popup").style.display = "none";
+  notificationCancelled = true;
+  const popupEl = document.getElementById("notification-popup");
+  popupEl.style.display = "none";
+  if (notificationTimer) clearTimeout(notificationTimer);
 }
 
-/* START */
-setInterval(updateNotification, 10000);
+function showNextNotification(delayMs) {
+  if (notificationCancelled) return;
+  notificationTimer = setTimeout(function () {
+    if (notificationCancelled) return;
+    updateNotification();
+    showNextNotification(15000); // repeat every 15 seconds until cancelled
+  }, delayMs);
+}
+
+/* START (hide first, then show after 15 seconds) */
+const initialPopupEl = document.getElementById("notification-popup");
+if (initialPopupEl) initialPopupEl.style.display = "none";
+showNextNotification(15000);
 </script>
 
 </body>

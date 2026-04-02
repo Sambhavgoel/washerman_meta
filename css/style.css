@@ -35,24 +35,38 @@ a:focus {
 }
 
 .btn.btn-custom {
-    padding: 10px 30px 12px 30px;
-    text-align: center; 
-    font-size: 16px;
-    font-weight: 500;
-    color: #ffffff;
-    background: #E81C2E;
+    background: #ff0000;
+    color: #000;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 30px;
     border: none;
-    border-radius: 60px;
-    box-shadow: inset 0 0 0 0 #202C45;
-    transition: ease-out 0.5s;
-    -webkit-transition: ease-out 0.5s;
-    -moz-transition: ease-out 0.5s;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+.btn.btn-custom i {
+    margin-right: 6px;
 }
 
 .btn.btn-custom:hover {
-    color: #E81C2E;
-    background: #202C45;
-    box-shadow: inset 200px 0 0 0 #202C45;
+    background: #e60000;
+    color: #000;
+    transform: translateY(-2px);
+}
+
+/* Match screenshots: Call Now button is white pill (force against internal page CSS) */
+.btn.btn-custom[href^="tel:"] {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: none !important;
+}
+
+.btn.btn-custom[href^="tel:"]:hover {
+    background: #f3f3f3 !important;
+    color: #000000 !important;
+    transform: translateY(-2px);
 }
 
 .btn:focus,
@@ -275,15 +289,41 @@ a:focus {
 }
 
 .nav-bar .btn.btn-custom {
-    color: #202C45;
-    background: #ffffff;
-    box-shadow: inset 0 0 0 0 #E81C2E;
+    color: #000000;
+    background: #ff0000;
+    box-shadow: none;
+    white-space: nowrap; /* prevents "Book a Demo" wrapping */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
 }
 
+.nav-bar .btn.btn-custom i {
+    font-size: 18px;
+}
+
+.nav-bar .btn.btn-custom[href^="tel:"] {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.nav-bar .btn.btn-custom:hover {
+    background: #e60000;
+    color: #000000;
+    box-shadow: none;
+    transform: translateY(-2px);
+}
+
+.nav-bar .btn.btn-custom[href^="tel:"]:hover {
+    background: #f3f3f3 !important;
+    color: #000000 !important;
+}
+
+/* Prevent generic nav hover styling from fighting the pill buttons */
 .nav-bar .btn:hover {
-    color: #ffffff;
-    background: #E81C2E;
-    box-shadow: inset 200px 0 0 0 #E81C2E;
+    box-shadow: none;
 }
 
 @media (min-width: 992px) {
@@ -2057,4 +2097,121 @@ a:focus {
 
 .footer .copyright p a:hover {
     color: #ffffff;
+}
+
+/* ==============================
+   Cross-page responsive tweaks
+   (applies to all HTML pages)
+   ============================== */
+
+@media (max-width: 575.98px) {
+    /* Navbar demo/call buttons */
+    .nav-bar .btn.btn-custom {
+        font-size: 16px !important;
+        padding: 10px 18px !important;
+    }
+
+    .nav-bar .btn.btn-custom i {
+        font-size: 16px !important;
+    }
+
+    /* Sticky contact icons */
+    .sticky-contact {
+        right: 10px !important;
+        bottom: 90px !important;
+    }
+
+    .sticky-btn {
+        width: 46px !important;
+        height: 46px !important;
+        font-size: 20px !important;
+    }
+
+    /* Chatbot button + box */
+    .chatbot-btn {
+        right: 15px !important;
+        bottom: 25px !important;
+        width: 46px !important;
+        height: 46px !important;
+        font-size: 20px !important;
+    }
+
+    .chatbot-container {
+        right: 10px !important;
+        bottom: 80px !important;
+        width: 320px !important;
+    }
+}
+
+/* Force common grids to stack on small screens */
+@media (max-width: 767.98px) {
+    /* Standard mobile edge padding */
+    .container,
+    .container-fluid {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    /* Common card/grid wrappers in your pages */
+    .cards,
+    .testimonial-grid,
+    .elite-row,
+    .services-grid,
+    .footer-top,
+    .footer-bottom {
+        grid-template-columns: 1fr !important;
+        display: grid !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .service-card {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* seo-links + areas (used in location/service pages) */
+    .seo-links,
+    .seo-tags {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .seo-links {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+
+    .seo-list,
+    .areas {
+        columns: 1 !important;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+    /* Sticky contact icons */
+    .sticky-contact {
+        right: 15px !important;
+        bottom: 105px !important;
+    }
+
+    .sticky-btn {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 21px !important;
+    }
+}
+
+/* Chatbot button: show same logo everywhere (before + after open) */
+.chatbot-btn img {
+    display: none !important;
+}
+
+.chatbot-btn {
+    color: transparent !important;
+    font-size: 0 !important;
+    background-image: url("../img/Logo1.png") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }
